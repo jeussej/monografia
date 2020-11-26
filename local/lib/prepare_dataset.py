@@ -280,3 +280,10 @@ def make_tf_dataset(sources, training=False, batch_size=1,
     ds = ds.prefetch(1)
 
     return ds
+
+def predicts_to_sources(test_sources,predictions):
+    predictions_list=predictions.tolist()
+    images,_=zip(*test_sources)
+    sources=[r for r in zip(images,predictions_list)]
+    return sources
+    
