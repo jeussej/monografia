@@ -282,8 +282,17 @@ def make_tf_dataset(sources, training=False, batch_size=1,
     return ds
 
 def predicts_to_sources(test_sources,predictions):
+    """
+    Replaces original Bbox eith predicted Bbox  
+
+    Args:
+        test_sources (list): list of test sourses shape[N,2]
+        predictions (np.array): array with predictions over a dataset shape[N,4] 
+
+    Returns:
+        sorces (list): list with sorces replacing test Bbox coordinates with predicted Bbox shape[N,2]
+    """
     predictions_list=predictions.tolist()
     images,_=zip(*test_sources)
     sources=[r for r in zip(images,predictions_list)]
     return sources
-    
