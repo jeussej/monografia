@@ -217,7 +217,7 @@ def augment_image(image):
 
 
 
-def make_tf_dataset(sources, training=False, batch_size=1,
+def make_tf_dataset(sources, training=False,new_size=(300,300), batch_size=1,
     num_epochs=1, num_parallel_calls=1, shuffle_buffer_size=None):
     """
     Returns an operation to iterate over the dataset specified in sources
@@ -266,7 +266,7 @@ def make_tf_dataset(sources, training=False, batch_size=1,
     ds = ds.map(load, num_parallel_calls=num_parallel_calls)
     
     #preprocces images
-    ds = ds.map(lambda x,y: (preprocess_image(x), y), num_parallel_calls=num_parallel_calls)
+    ds = ds.map(lambda x,y: (preprocess_image(x,new_size=new_size), y), num_parallel_calls=num_parallel_calls)
     
     #data aumentation
     if training:
